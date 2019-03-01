@@ -52,18 +52,18 @@ class EmojiTableViewController: UITableViewController {
         let defaultAction = UIAlertAction(title: actionType.uppercased(), style: .default) { [weak self] (action)
             in
             guard let symbol = alertController.textFields?[0].text,
-                  let name = alertController.textFields?[1].text,
-                  let summary = alertController.textFields?[2].text else{ return }
+                let name = alertController.textFields?[1].text,
+                let summary = alertController.textFields?[2].text else{ return }
             
             if actionType.caseInsensitiveCompare("add") == .orderedSame {
                 self?.emojiService?.addEmoji(symbol: symbol, name: name, summary: summary)
             }
             else {
                 guard let symbol = alertController.textFields?[0].text, !symbol.isEmpty,
-                      let name = alertController.textFields?[1].text, !name.isEmpty,
-                      let summary = alertController.textFields?[2].text, !summary.isEmpty,
-                      let emojiToUpdate = self?.emojiToUpdate
-                else { return }
+                    let name = alertController.textFields?[1].text, !name.isEmpty,
+                    let summary = alertController.textFields?[2].text, !summary.isEmpty,
+                    let emojiToUpdate = self?.emojiToUpdate
+                    else { return }
                 
                 self?.emojiService?.updateEmoji(symbol: emojiToUpdate.symbol!,
                                                 name: emojiToUpdate.name!,

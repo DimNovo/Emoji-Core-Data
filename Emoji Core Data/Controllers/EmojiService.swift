@@ -26,7 +26,7 @@ class EmojiService {
         let request: NSFetchRequest<Emoji> = Emoji.fetchRequest()
         
         do {
-          emojis = try managedObjectContext.fetch(request)
+            emojis = try managedObjectContext.fetch(request)
             return emojis
         } catch let error as NSError {
             print("Error fetching emojis: \(error.localizedDescription)")
@@ -72,7 +72,7 @@ class EmojiService {
     // MARK: - ... Private
     
     // Save func
-     private func save() {
+    private func save() {
         
         do {
             try managedObjectContext.save()

@@ -39,7 +39,7 @@ class EmojiTableViewController: UITableViewController
     
     func alertController(actionType: String) -> UIAlertController
     {
-        let alertController = UIAlertController(title: "Emoji Add", message: "Choose your Emoji...", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "🙈🙉🙊", message: "Choose your Emoji...", preferredStyle: .alert)
         
         alertController.addTextField
             {
@@ -79,9 +79,11 @@ class EmojiTableViewController: UITableViewController
             if actionType.caseInsensitiveCompare("add") == .orderedSame
             {
                 self?.emojiService?.addEmoji(symbol: symbol, name: name, summary: summary)
+                
             }
                 else
             {
+                
                 guard let emojiToUpdate = self?.emojiToUpdate,
                       let symbol = alertController.textFields?[0].text, !symbol.isEmpty,
                       let name = alertController.textFields?[1].text, !name.isEmpty,

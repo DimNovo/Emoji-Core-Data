@@ -9,34 +9,40 @@
 import Foundation
 import CoreData
 
-class EmojiService {
+class EmojiService
+{
     
     private let managedObjectContext: NSManagedObjectContext
     private var emojis = [Emoji]()
     
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(managedObjectContext: NSManagedObjectContext)
+    {
         self.managedObjectContext = managedObjectContext
     }
     
     // MARK: - ... Public
     
     // Read
-    func getAllEmojis() -> [Emoji]? {
+    func getAllEmojis() -> [Emoji]?
+    {
         
         let request: NSFetchRequest<Emoji> = Emoji.fetchRequest()
         
-        do {
+        do
+        {
             emojis = try managedObjectContext.fetch(request)
             return emojis
-        } catch let error as NSError {
+        }
+        catch let error as NSError
+        {
             print("Error fetching emojis: \(error.localizedDescription)")
         }
         return nil
     }
     
     // Create
-    func addEmoji(symbol: String, name: String,
-                  summary: String) {
+    func addEmoji(symbol: String, name: String, summary: String)
+    {
         
         let emoji = Emoji(context: managedObjectContext)
         
@@ -49,22 +55,16 @@ class EmojiService {
     }
     
     // Update
-    func updateEmoji(symbol: String, name: String, summary: String) {
-        
-        let emoji = Emoji(context: managedObjectContext)
-        managedObjectContext.delete(emoji)
-        
-        emoji.name = name
-        emoji.symbol = symbol
-        emoji.summary = summary
-        
+    func updateEmoji(emoji: Emoji)
+    {
         save()
     }
     
     // Delete
-    func delete(emoji: Emoji) {
+    func delete(emoji: Emoji)
+    {
         
-        emojis = emojis.filter({$0 != emoji})
+        emojis = emojis.filter({ $0 != emoji })
         managedObjectContext.delete(emoji)
         save()
     }
@@ -72,11 +72,15 @@ class EmojiService {
     // MARK: - ... Private
     
     // Save func
-    private func save() {
+    private func save()
+    {
         
-        do {
+        do
+        {
             try managedObjectContext.save()
-        } catch let error as NSError {
+        }
+        catch let error as NSError
+        {
             print("Save failed: \(error.localizedDescription)")
         }
     }
